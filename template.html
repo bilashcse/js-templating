@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <style>
+
+            body{
+                margin:  0;
+                margin-top: 30px;
+                padding: 0;
+                width: 768px;
+                height: 840px;
+                color: #454545;
+                font-size: 13px;
+                font-family: 'Roboto', Arial, sans-serif;
+            }
+
+            p {
+               margin: 5px 0;
+            }
+
+            h1, h2, h3{
+                margin:  0;
+                padding: 0;
+                font-weight: 500;
+                color: #222222;
+            }
+
+            h1{
+                font-size: 28px;
+            }
+
+            h2{
+                font-size: 18px;
+            }
+
+            th, label{
+                color: #878787;
+                font-size: 12px;
+                font-weight: normal;
+                text-transform: capitalize;
+            }
+
+            td, th{
+                text-align: justify;
+                padding: 10px 30px 10px 0;
+                vertical-align: middle;
+                border-bottom: 1px solid #ADADAD;
+                line-height: 0.5;
+            }
+            .container {
+                height: 560px;
+                box-sizing: border-box;
+                width: 100%;
+                padding: 0px 44px;
+            }
+            .container-full{
+                height: 1118px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .right{
+                float: right;
+            }
+
+            .invoice-header{
+                width:  100%;
+                height: 165px;
+                padding: 0px
+            }
+
+            .invoice-header .title{
+                padding-top:  10px;
+     
+            }
+            .shop-image {
+                float: right;
+                width: 60px;
+            }
+
+            .invoice-header .address-block{
+                margin-top: 15px;
+                overflow: hidden;
+            }
+
+            .invoice-header .issuer{
+                float: left;
+                text-align: left;
+                width: 50%;
+            }
+
+            .invoice-header .issued-to{
+                float: right;
+                text-align: left;
+                width: 50%;
+            }
+            .invoice-header .issuer div > div,
+            .invoice-header .issued-to div > div{
+                display: inline-block;
+                vertical-align: top;
+            }
+
+            .invoice-header .issuer div > div:first-child,
+            .invoice-header .issued-to div > div:first-child{
+                width: 25px;
+            }
+
+            .invoice-header .issuer div > div:last-child,
+            .invoice-header .issued-to div > div:last-child{
+                width: 300px;
+            }
+
+            .invoice-header .issuer div > div:last-child span,
+            .invoice-header .issued-to div > div:last-child span{
+                line-height: 1.5;
+            }
+
+            .product-list{
+                width: 100%;
+                padding: 30px 0px 10px 0px;
+            }
+
+            .product-list table{
+                width: 100%;
+                border-spacing: 0;
+            }
+
+            .product-list table tr th:nth-last-of-type(2),
+            .product-list table tr td:nth-last-of-type(2),
+            .product-list table tr th:nth-last-of-type(3),
+            .product-list table tr td:nth-last-of-type(3){
+                text-align: right;
+            }
+            .product-list table tr th:last-of-type,
+            .product-list table tr td:last-of-type{
+                text-align: right;
+                padding-right: 0;
+            }
+
+            .summary {
+                width: 100%;
+                padding: 0px 0px 20px 0px;
+                height: 85px;
+            }
+
+            .summary .instruction{
+                padding-top: 10px;
+                width: 50%;
+                float: left;
+            }
+            .summary .summary-invoice{
+                width: 50%;
+                float: left;
+            }
+            .summary-invoice .summary-line{
+                padding-top: 10px;
+                text-align: right;
+            }
+
+            .summary-invoice .summary-line div:first-child{
+                width: 150px;
+                font-weight: 500;
+                text-align: right;
+                display: inline-block;
+                vertical-align: baseline;
+            }
+            .summary-invoice .summary-line div:last-child{
+                width: 85px;
+                font-weight: 500;
+                text-align: right;
+                display: inline-block;
+                vertical-align: baseline;
+            }
+            .invoice-footer{
+                width: 100%;
+                padding: 10px 0px;
+                height: 30px;
+                background-color: #eee;
+            }
+
+            .invoice-footer .notes{
+                float: left;
+                width: 460px;
+            }
+
+            .invoice-footer .notes div{
+                color: #878787;
+                font-size: 11px;
+                padding-bottom: 2px;
+            }
+
+            .invoice-footer .notes sup{
+                padding-right: 4px;
+            }
+
+            .invoice-footer .shopUp{
+                float: right;
+                width: 120px;
+                vertical-align: top;
+            }
+            .invoice-footer .shopUp .copy-right {
+                margin-top: -10px;
+            }
+
+            .invoice-footer .shopUp div{
+                display: table;
+            }
+
+            .invoice-footer .shopUp div img,
+            .invoice-footer .shopUp div div {
+                display: table-cell;
+                vertical-align: middle;
+                text-align: right;
+
+            }
+
+            .invoice-footer .shopUp div div{
+                padding-right: 5px;
+            }
+            .customer-address{
+                text-align: right;
+            }
+
+            .center {
+                text-align: center!important;
+            }
+            .padding-left-20 {
+                padding-left: 20px;
+                padding-top: 7px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="invoice-header">
+                <div class="title">
+                    <h1> Invoice #{{invoiceId}}</h1>
+                </div>
+                <div class="address-block">
+                    <div class="issuer">
+                        <label>issued by</label> <br/><br/>
+                        <div>
+                            <div><i class="fa fa-shopping-bag"></i></div>
+                            <div><span>Owner</span></div>
+                        </div>
+                        <div>
+                            <div><i class="fa fa-phone"></i></div>
+                            <div><span>01919222444</span></div>
+                        </div>
+                    </div>
+                    <div class="issued-to">
+                        <label class="right">issued to</label> <br/><br/>
+                        <div class="right">
+                            <div class="right"><i class="fa fa-user right"></i></div>
+                            <div><span class="right">{{shopName}}</span></div>
+                        </div>
+                        <div class="right">
+                            <div class="right"><i class="fa fa-phone right"></i></div>
+                            <div><span class="right">{{shopPhone}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-list">
+                <h2>Parcel Lists</h2>
+                <table>
+                    <tr>
+                        <th style="width: 420px;">Parcel ID</th>
+                        <th style="width: 100px;">Amount</th>
+                        <th style="width: 100px;">Charge</th>
+                        <th style="width: 60px;">Total</th>
+                    </tr>
+                    <tbody>
+                        {{parcel}}
+                        <script>
+                            <tr>
+                                <td>{{parcel.id}}</td>
+                                <td>৳ {{parcel.cash}}</td>
+                                <td>৳ {{parcel.charge}}</td>
+                                <td>৳ {{parcel.amount}}</td>
+                            </tr>
+                        </script>  
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="product-list">
+                    <h2>Loan Lists</h2>
+                    <table>
+                        <tr>
+                            <th style="width: 420px;">Parcel ID</th>
+                            <th style="width: 100px;">Amount</th>
+                            <th style="width: 100px;">Charge</th>
+                            <th style="width: 60px;">Total</th>
+                        </tr>
+                        <tbody>
+                            {{loan}}
+                            <script>
+                                <tr>
+                                    <td>{{loan.id}}</td>
+                                    <td>৳ {{loan.amount}}</td>
+                                    <td>৳ {{loan.charge}}</td>
+                                    <td>৳ {{loan.total}}</td>
+                                </tr>
+                            </script> 
+                        </tbody>
+                    </table>
+                </div>
+
+            <div class="summary">
+                <div class="instruction">
+                    <label>Note: {{adjustedNote}}</label> 
+                </div>
+
+               <div class="summary-invoice">
+                    <div class="summary-line">
+                        <div>Adjusted Amount</div>
+                        <div>৳ {{adjustedAmount}}</div>
+                    </div>   
+          
+                    <div class="summary-line">
+                        <div>Total</div>
+                        <div>৳ {{total}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="invoice-footer">
+                    
+                <div class="notes">
+                    <div class="padding-left-20">If you have any query, please contact us at +01919222444</div>
+                    
+                </div>
+                <div class="shopUp">
+                    <div class="copy-right">
+                        <div>Powered By</div>
+                        <img src="https://s3-us-west-2.amazonaws.com/ice9-shopup/random/shopup-invoice-logo.png" width="32" />
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </body>
+</html>
