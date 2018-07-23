@@ -8,7 +8,7 @@ var misc = require('./replace.js');
 function goToTemplateEngine(data, htmlUrl) {
 
     var htmlTemplate = fs.readFileSync(path.join(__dirname, htmlUrl), 'utf8');
-    var re = /<script\b[^>]*>([\s\S]*?)<\/script>/gm;
+    var reg = /<script\b[^>]*>([\s\S]*?)<\/script>/gm;
     var match, arrValues = [],
         templateMap = {};
 
@@ -21,7 +21,7 @@ function goToTemplateEngine(data, htmlUrl) {
         }
     }
 
-    while (match = re.exec(htmlTemplate)) {
+    while (match = reg.exec(htmlTemplate)) {
         var templateName = (((/({{.*}})/).exec(match[1]))[0].replace(/{{|}}/g, '')).split(".")[0];
         templateMap[templateName] = match[1];
 
