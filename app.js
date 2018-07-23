@@ -5,39 +5,6 @@ var app = express();
 var misc = require('./replace.js');
 
 
-var demoData = {
-    shopName: 'BD Shop',
-    shopPhone: '01717000111',
-    invoiceId: '12001',
-    adjustedNote: 'This is test adjustment.',
-    adjustedAmount: 120,
-    total: 1500,
-    parcel: [{
-        id: 123,
-        cash: 1200,
-        charge: 50,
-        amount: 1150
-    }, {
-        id: 125,
-        cash: 500,
-        charge: 50,
-        amount: 450
-    }],
-    loan: [{
-        id: 222,
-        amount: 1200,
-        charge: 50,
-        total: 1150
-    }, {
-        id: 333,
-        amount: 500,
-        charge: 50,
-        total: 450
-    }]
-};
-
-
-
 function goToTemplateEngine(data, htmlUrl) {
 
     var htmlTemplate = fs.readFileSync(path.join(__dirname, htmlUrl), 'utf8');
@@ -80,7 +47,7 @@ function goToTemplateEngine(data, htmlUrl) {
 
 app.listen('3000', function () {
     console.log("Server running . .");
-    goToTemplateEngine(demoData, './template.html')
+    goToTemplateEngine(data, './template.html')
     .then(function (html) {
         console.log(html);
     });
