@@ -8,9 +8,9 @@ var misc = require('./replace.js');
 function goToTemplateEngine(data, htmlUrl) {
 
     var htmlTemplate = fs.readFileSync(path.join(__dirname, htmlUrl), 'utf8');
-    var reg = /<script\b[^>]*>([\s\S]*?)<\/script>/gm;
-    var match, arrValues = [],
-        templateMap = {};
+
+    var re = /<script\b[^>]*>([\s\S]*?)<\/script>/gm;
+    var match, arrValues = [], templateMap = {};
 
     for (var key in data) {
         if ((typeof data[key]) == 'object') {
@@ -21,21 +21,25 @@ function goToTemplateEngine(data, htmlUrl) {
         }
     }
 
-    while (match = reg.exec(htmlTemplate)) {
+    while (match = re.exec(htmlTemplate)) {
         var templateName = (((/({{.*}})/).exec(match[1]))[0].replace(/{{|}}/g, '')).split(".")[0];
         templateMap[templateName] = match[1];
 
     }
 
-    arrValues.forEach(function (val) {
-        var tempHtml = templateMap[val.key].trim();
-        val.values.forEach(function (data) {
+    arrValues.forEach(function(val) {
+        var templateHtml = templateMap[val.key].trim();
+        var updatedHtml = '';
+        
+        val.values.forEach(function(data) {
+            var temp = templateHtml;
             for (var key in data) {
-                tempHtml = tempHtml.replace('{{' + val.key + '.' + key + '}}', data[key]);
+                temp = temp.replace('{{' + val.key + '.' + key + '}}', data[key]);
             }
+            updatedHtml += temp;
         });
 
-        data[val.key] = tempHtml;
+        data[val.key] = updatedHtml;
     });
 
 
